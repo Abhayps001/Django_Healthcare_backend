@@ -1,0 +1,13 @@
+$kind: http-request
+url: "{{baseUrl}}/api/patients/"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: '{"name":"Jamie Sample","age":30,"gender":"other","address":"10 Example Street","phone_number":"+1 555 0100"}'
+scripts:
+  - type: afterResponse
+    code: if (pm.response.code === 201) pm.collectionVariables.set('patientId', pm.response.json().id);
+    language: text/javascript
+order: 1000

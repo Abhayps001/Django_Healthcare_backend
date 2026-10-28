@@ -1,0 +1,9 @@
+$kind: http-request
+url: "{{baseUrl}}/api/doctors/{{doctorId}}/"
+method: PUT
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: '{"name":"Taylor Doctor Updated","specialization":"Cardiology","email":"taylor@example.com","phone_number":"+1 555 0103"}'
+order: 4000

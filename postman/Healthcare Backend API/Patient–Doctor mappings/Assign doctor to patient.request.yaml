@@ -1,0 +1,13 @@
+$kind: http-request
+url: "{{baseUrl}}/api/mappings/"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: '{"patient":"{{patientId}}","doctor":"{{doctorId}}"}'
+scripts:
+  - type: afterResponse
+    code: if (pm.response.code === 201) pm.collectionVariables.set('mappingId', pm.response.json().id);
+    language: text/javascript
+order: 1000

@@ -1,0 +1,11 @@
+$kind: http-request
+url: "{{baseUrl}}/api/auth/register/"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: '{"name":"Alex Patient","email":"{{testEmail}}","password":"{{testPassword}}"}'
+auth:
+  type: noauth
+order: 1000

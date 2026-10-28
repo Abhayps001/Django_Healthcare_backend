@@ -1,0 +1,20 @@
+$kind: http-request
+url: "{{baseUrl}}/api/auth/login/"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: '{"email":"{{testEmail}}","password":"{{testPassword}}"}'
+auth:
+  type: noauth
+scripts:
+  - type: afterResponse
+    code: |-
+      if (pm.response.code === 200) {
+        const tokens = pm.response.json();
+        pm.collectionVariables.set('accessToken', tokens.access);
+        pm.collectionVariables.set('refreshToken', tokens.refresh);
+      }
+    language: text/javascript
+order: 2000

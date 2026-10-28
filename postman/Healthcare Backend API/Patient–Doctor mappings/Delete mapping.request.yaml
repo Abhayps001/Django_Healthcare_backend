@@ -1,0 +1,4 @@
+$kind: http-request
+url: "{{baseUrl}}/api/mappings/{{mappingId}}/"
+method: DELETE
+order: 4000

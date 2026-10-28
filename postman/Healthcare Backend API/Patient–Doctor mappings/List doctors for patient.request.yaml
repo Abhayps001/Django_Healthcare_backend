@@ -1,0 +1,4 @@
+$kind: http-request
+url: "{{baseUrl}}/api/mappings/{{patientId}}/"
+method: GET
+order: 3000

@@ -1,0 +1,9 @@
+$kind: http-request
+url: "{{baseUrl}}/api/patients/{{patientId}}/"
+method: PUT
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: '{"name":"Jamie Updated","age":31,"gender":"other","address":"12 Example Street","phone_number":"+1 555 0101"}'
+order: 4000

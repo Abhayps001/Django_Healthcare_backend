@@ -1,0 +1,17 @@
+$kind: collection
+description: Complete healthcare API endpoint examples. Register, then login; the login script saves JWT values for authenticated requests.
+variables:
+  baseUrl: http://127.0.0.1:8000
+  testEmail: ""
+  testPassword: ""
+  accessToken: ""
+  refreshToken: ""
+  patientId: "1"
+  doctorId: "1"
+  mappingId: "1"
+auth:
+  - id: e9a1e389-7647-4ea0-a249-871ad8c6dd06
+    type: bearer
+    name: bearer auth
+    credentials:
+      token: "{{accessToken}}"

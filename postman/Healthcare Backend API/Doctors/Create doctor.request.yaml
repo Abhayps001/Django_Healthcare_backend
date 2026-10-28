@@ -1,0 +1,13 @@
+$kind: http-request
+url: "{{baseUrl}}/api/doctors/"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: '{"name":"Taylor Doctor","specialization":"Cardiology","email":"taylor@example.com","phone_number":"+1 555 0102"}'
+scripts:
+  - type: afterResponse
+    code: if (pm.response.code === 201) pm.collectionVariables.set('doctorId', pm.response.json().id);
+    language: text/javascript
+order: 1000

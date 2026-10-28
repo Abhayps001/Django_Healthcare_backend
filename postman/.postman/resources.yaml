@@ -1,0 +1,7 @@
+# Use this workspace to collaborate
+workspace:
+  id: 23c83e4b-6e50-457f-8119-72a53d935fa0
+
+localResources:
+  collections:
+    - ../Healthcare Backend API
