@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Healthcare Backend API — Test Report</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 13px; color: var(--content-color-primary); padding: 16px; }
+  h1 { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+  h2 { font-size: 13px; font-weight: 700; margin: 14px 0 6px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--content-color-secondary, #666); }
+  .meta { font-size: 11px; color: var(--content-color-secondary, #888); margin-bottom: 12px; }
+  .summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 14px; }
+  .stat { border-radius: 6px; padding: 10px 12px; text-align: center; }
+  .stat .num { font-size: 26px; font-weight: 700; line-height: 1; }
+  .stat .lbl { font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 3px; }
+  .stat.total  { background: var(--background-color-secondary, #f0f0f0); }
+  .stat.pass   { background: #d4edda; color: #155724; }
+  .stat.fail   { background: #f8d7da; color: #721c24; }
+  .stat.block  { background: #fff3cd; color: #856404; }
+  .scroll-wrap { overflow-y: auto; max-height: 420px; border: 1px solid var(--border-color-default, #ddd); border-radius: 6px; }
+  table { width: 100%; border-collapse: collapse; font-size: 11.5px; }
+  thead th { position: sticky; top: 0; background: var(--background-color-secondary, #f5f5f5); padding: 6px 8px; text-align: left; font-weight: 600; border-bottom: 1px solid var(--border-color-default, #ddd); white-space: nowrap; }
+  tbody tr:nth-child(even) { background: var(--background-color-secondary, #fafafa); }
+  td { padding: 5px 8px; vertical-align: top; border-bottom: 1px solid var(--border-color-default, #eee); }
+  .badge { display: inline-block; border-radius: 3px; padding: 1px 6px; font-size: 10px; font-weight: 700; white-space: nowrap; }
+  .pass-b  { background: #d4edda; color: #155724; }
+  .fail-b  { background: #f8d7da; color: #721c24; }
+  .block-b { background: #fff3cd; color: #856404; }
+  .method { font-weight: 600; font-size: 10px; }
+  .GET    { color: #0d6efd; }
+  .POST   { color: #198754; }
+  .PUT    { color: #fd7e14; }
+  .DELETE { color: #dc3545; }
+  .note { color: var(--content-color-secondary, #666); font-size: 10.5px; }
+  .bugs { background: #fff3cd; border: 1px solid #ffc107; border-radius: 6px; padding: 10px 12px; margin-top: 10px; font-size: 12px; }
+  .bugs li { margin-left: 16px; margin-top: 4px; }
+  .clean { background: #d4edda; border: 1px solid #28a745; border-radius: 6px; padding: 8px 12px; margin-top: 8px; font-size: 12px; }
+</style>
+</head>
+<body>
+
+<h1>🏥 Healthcare Backend API — Test Report</h1>
+<p class="meta">Run date: 2026-10-28 · Base URL: http://127.0.0.1:8000 · User A: qa.testalpha.20261028@mailtest.dev (ID 2) · User B: qa.testbeta.20261028@mailtest.dev (ID 3)</p>
+
+<div class="summary-grid">
+  <div class="stat total"><div class="num">47</div><div class="lbl">Total</div></div>
+  <div class="stat pass"><div class="num">46</div><div class="lbl">Passed</div></div>
+  <div class="stat fail"><div class="num">0</div><div class="lbl">Failed</div></div>
+  <div class="stat block"><div class="num">1</div><div class="lbl">Note</div></div>
+</div>
+
+<h2>Full Test Results</h2>
+<div class="scroll-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>#</th><th>Phase</th><th>Method</th><th>Endpoint</th><th>Expected</th><th>Actual</th><th>Result</th><th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Phase 1A -->
+    <tr><td>1</td><td>1A – Register</td><td class="method POST">POST</td><td>/api/auth/register/</td><td>201</td><td>201</td><td><span class="badge pass-b">PASS</span></td><td class="note">Returns id, name, email. No password field.</td></tr>
+    <tr><td>2</td><td>1A – Register</td><td class="method POST">POST</td><td>/api/auth/register/</td><td>400</td><td>400</td><td><span class="badge pass-b">PASS</span></td><td class="note">Duplicate email rejected: "user with this email already exists."</td></tr>
+    <tr><td>3</td><td>1A – Register</td><td class="method POST">POST</td><td>/api/auth/register/</td><td>400</td><td>400</td><td><span class="badge pass-b">PASS</span></td><td class="note">Missing email: "This field is required."</td></tr>
+    <tr><td>4</td><td>1A – Register</td><td class="method POST">POST</td><td>/api/auth/register/</td><td>400</td><td>400</td><td><span class="badge pass-b">PASS</span></td><td class="note">Missing password: "This field is required."</td></tr>
+    <tr><td>5</td><td>1A – Register</td><td class="method POST">POST</td><td>/api/auth/register/</td><td>400</td><td>400</td><td><span class="badge pass-b">PASS</span></td><td class="note">Invalid email format: "Enter a valid email address."</td></tr>
+    <tr><td>6</td><td>1A – Register</td><td class="method POST">POST</td><td>/api/auth/register/</td><td>400</td><td>400</td><td><span class="badge pass-b">PASS</span></td><td class="note">Weak password "123": too short, too common, entirely numeric.</td></tr>
+    <!-- Phase 1B -->
+    <tr><td>7</td><td>1B – Login</td><td class="method POST">POST</td><td>/api/auth/login/</td><td>200</td><td>200</td><td><span class="badge pass-b">PASS</span></td><td class="note">Returns access + refresh tokens. Both non-empty.</td></tr>
+    <tr><td>8</td><td>1B – Login</td><td class="method POST">POST</td><td>/api/auth/login/</td><td>401</td><td>401</td><td><span class="badge pass-b">PASS</span></td><td class="note">Wrong password: "Invalid email or password."</td></tr>
+    <tr><td>9</td><td>1B – Login</td><td class="method POST">POST</td><td>/api/auth/login/</td><td>401</td><td>401</td><td><span class="badge pass-b">PASS</span></td><td class="note">Unknown email: "Invalid email or password."</td></tr>
+    <tr><td>10</td><td>1B – Login</td><td class="method POST">POST</td><td>/api/auth/login/</td><td>400</td><td>400</td><td><span class="badge pass-b">PASS</span></td><td class="note">Empty body: both fields required.</td></tr>
+    <tr><td>11</td><td>1B – Refresh</td><td class="method POST">POST</td><td>/api/auth/token/refresh/</td><td>200</td><td>200</td><td><span class="badge pass-b">PASS</span></td><td class="note">Valid refresh token returns new access token.</td></tr>
+    <!-- Phase 2 -->
+    <tr><td>12</td><td>2 – Auth</td><td class="method GET">GET</td><td>/api/patients/</td><td>401</td><td>401</td><td><span class="badge pass-b">PASS</span></td><td class="note">No Authorization header: credentials not provided.</td></tr>
+    <tr><td>13</td><td>2 – Auth</td><td class="method GET">GET</td><td>/api/patients/</td><td>401</td><td>401</td><td><span class="badge pass-b">PASS</span></td><td class="note">Invalid Bearer token: token_not_valid.</td></tr>
+    <tr><td>14</td><td>2 – Auth</td><td class="method GET">GET</td><td>/api/patients/</td><td>401</td><td>401</td><td><span class="badge pass-b">PASS</span></td><td class="note">Malformed scheme (NotBearer): credentials not provided.</td></tr>
+    <tr><td>15</td><td>2 – Auth</td><td class="method GET">GET</td><td>/api/patients/</td><td>200</td><td>200</td><td><span class="badge pass-b">PASS</span></td><td class="note">Valid token: 200 OK, empty list (no patients yet).</td></tr>
+    <!-- Phase 3 -->
+    <tr><td>16</td><td>3A – Patient</td><td class="method POST">POST</td><td>/api/patients/</td><td>201</td><td>201</td><td><span class="badge pass-b">PASS</span></td><td class="note">Patient ID=1 created. owner=2 set by server from JWT.</td></tr>
+    <tr><td>17</td><td>3B – Patient</td><td class="method GET">GET</td><td>/api/patients/</td><td>200</td><td>200</td><td><span class="badge pass-b">PASS</span></td><td class="note">List returns [patient ID=1]. Valid JSON array.</td></tr>
+    <tr><td>18</td><td>3C – Patient</td><td class="method GET">GET</td><td>/api/patients/1/</td><td>200</td><td>200</td><td><span class="badge pass-b">PASS</span></td><td class="note">Correct patient returned. All fields match.</td></tr>
+    <tr><td>19</td><td>3D – Patient</td><td class="method PUT">PUT</td><td>/api/patients/1/</td><td>200</td><td>200</td><td><span class="badge pass-b">PASS</span></td><td class="note">Name→"QA Patient Alpha Updated", age→31. updated_at changed.</td></tr>
+    <tr><td>20</td><td>3D – Patient</td><td class="method GET">GET</td><td>/api/patients/1/</td><td>200</td><td>200</td><td><span class="badge pass-b">PASS</span></td><td class="note">Update persisted: name and age confirmed via subsequent GET.</td></tr>
+    <!-- Phase 4 -->
+    <tr><td>21</td><td>4A – Doctor</td><td class="method POST">POST</td><td>/api/doctors/</td><td>201</td><td>201</td><td><span class="badge pass-b">PASS</span></td><td class="note">Doctor ID=1 created. All fields present.</td></tr>
+    <tr><td>22</td><td>4B – Doctor</td><td class="method GET">GET</td><td>/api/doctors/</td><td>200</td><td>200</td><td><span class="badge pass-b">PASS</span></td><td class="note">List returns [doctor ID=1].</td></tr>
+    <tr><td>23</td><td>4C – Doctor</td><td class="method GET">GET</td><td>/api/doctors/1/</td><td>200</td><td>200</td><td><span class="badge pass-b">PASS</span></td><td class="note">Correct doctor returned.</td></tr>
+    <tr><td>24</td><td>4D – Doctor</td><td class="method PUT">PUT</td><td>/api/doctors/1/</td><td>200</td><td>200</td><td><span class="badge pass-b">PASS</span></td><td class="note">Specialization→"Neurology". updated_at changed.</td></tr>
+    <tr><td>25</td><td>4D – Doctor</td><td class="method GET">GET</td><td>/api/doctors/1/</td><td>200</td><td>200</td><td><span class="badge pass-b">PASS</span></td><td class="note">Update persisted: specialization confirmed via subsequent GET.</td></tr>
+    <tr><td>26</td><td>4 – Auth</td><td class="method GET">GET</td><td>/api/doctors/</td><td>401</td><td>401</td><td><span class="badge pass-b">PASS</span></td><td class="note">Unauthenticated access to doctors endpoint rejected.</td></tr>
+    <!-- Phase 5 -->
+    <tr><td>27</td><td>5A – Mapping</td><td class="method POST">POST</td><td>/api/mappings/</td><td>201</td><td>201</td><td><span class="badge pass-b">PASS</span></td><td class="note">Mapping ID=1 created. patient=1, doctor=1.</td></tr>
+    <tr><td>28</td><td>5B – Mapping</td><td class="method GET">GET</td><td>/api/mappings/</td><td>200</td><td>200</td><td><span class="badge pass-b">PASS</span></td><td class="note">Mapping visible in list for authorized user.</td></tr>
+    <tr><td>29</td><td>5C – Mapping</td><td class="method GET">GET</td><td>/api/mappings/1/</td><td>200</td><td>200</td><td><span class="badge pass-b">PASS</span></td><td class="note">Returns list of doctors for patient ID=1. Full doctor object nested.</td></tr>
+    <tr><td>30</td><td>5 – Duplicate</td><td class="method POST">POST</td><td>/api/mappings/</td><td>400</td><td>400</td><td><span class="badge pass-b">PASS</span></td><td class="note">Duplicate mapping rejected: "patient, doctor must make a unique set."</td></tr>
+    <!-- Phase 6 -->
+    <tr><td>31</td><td>6 – Edge</td><td class="method GET">GET</td><td>/api/patients/99999/</td><td>404</td><td>404</td><td><span class="badge pass-b">PASS</span></td><td class="note">Nonexistent patient.</td></tr>
+    <tr><td>32</td><td>6 – Edge</td><td class="method PUT">PUT</td><td>/api/patients/99999/</td><td>404</td><td>404</td><td><span class="badge pass-b">PASS</span></td><td class="note">Update nonexistent patient.</td></tr>
+    <tr><td>33</td><td>6 – Edge</td><td class="method DELETE">DELETE</td><td>/api/patients/99999/</td><td>404</td><td>404</td><td><span class="badge pass-b">PASS</span></td><td class="note">Delete nonexistent patient.</td></tr>
+    <tr><td>34</td><td>6 – Edge</td><td class="method GET">GET</td><td>/api/doctors/99999/</td><td>404</td><td>404</td><td><span class="badge pass-b">PASS</span></td><td class="note">Nonexistent doctor.</td></tr>
+    <tr><td>35</td><td>6 – Edge</td><td class="method PUT">PUT</td><td>/api/doctors/99999/</td><td>404</td><td>404</td><td><span class="badge pass-b">PASS</span></td><td class="note">Update nonexistent doctor.</td></tr>
+    <tr><td>36</td><td>6 – Edge</td><td class="method DELETE">DELETE</td><td>/api/doctors/99999/</td><td>404</td><td>404</td><td><span class="badge pass-b">PASS</span></td><td class="note">Delete nonexistent doctor.</td></tr>
+    <tr><td>37</td><td>6 – Edge</td><td class="method POST">POST</td><td>/api/patients/</td><td>400</td><td>400</td><td><span class="badge pass-b">PASS</span></td><td class="note">Missing all fields: name, age, gender, address, phone_number required.</td></tr>
+    <tr><td>38</td><td>6 – Edge</td><td class="method POST">POST</td><td>/api/doctors/</td><td>400</td><td>400</td><td><span class="badge pass-b">PASS</span></td><td class="note">Missing all fields: name, specialization, email, phone_number required.</td></tr>
+    <tr><td>39</td><td>6 – Edge</td><td class="method POST">POST</td><td>/api/mappings/</td><td>400</td><td>400</td><td><span class="badge pass-b">PASS</span></td><td class="note">Nonexistent patient ID 99999: "Invalid pk – object does not exist."</td></tr>
+    <tr><td>40</td><td>6 – Edge</td><td class="method POST">POST</td><td>/api/mappings/</td><td>400</td><td>400</td><td><span class="badge pass-b">PASS</span></td><td class="note">Nonexistent doctor ID 99999: "Invalid pk – object does not exist."</td></tr>
+    <tr><td>41</td><td>6 – Edge</td><td class="method GET">GET</td><td>/api/mappings/99999/</td><td>404</td><td>404</td><td><span class="badge pass-b">PASS</span></td><td class="note">Nonexistent patient ID for mapping lookup.</td></tr>
+    <tr><td>42</td><td>6 – Edge</td><td class="method DELETE">DELETE</td><td>/api/mappings/99999/</td><td>404</td><td>404</td><td><span class="badge pass-b">PASS</span></td><td class="note">Nonexistent mapping ID.</td></tr>
+    <!-- Phase 7 -->
+    <tr><td>43</td><td>7 – Cross-User</td><td class="method GET">GET</td><td>/api/patients/</td><td>200 []</td><td>200 []</td><td><span class="badge pass-b">PASS</span></td><td class="note">User B list: empty — User A's patient not exposed.</td></tr>
+    <tr><td>44</td><td>7 – Cross-User</td><td class="method GET">GET</td><td>/api/patients/1/</td><td>404</td><td>404</td><td><span class="badge pass-b">PASS</span></td><td class="note">User B cannot retrieve User A's patient.</td></tr>
+    <tr><td>45</td><td>7 – Cross-User</td><td class="method PUT">PUT</td><td>/api/patients/1/</td><td>404</td><td>404</td><td><span class="badge pass-b">PASS</span></td><td class="note">User B cannot update User A's patient.</td></tr>
+    <tr><td>46</td><td>7 – Cross-User</td><td class="method DELETE">DELETE</td><td>/api/patients/1/</td><td>404</td><td>404</td><td><span class="badge pass-b">PASS</span></td><td class="note">User B cannot delete User A's patient.</td></tr>
+    <tr><td>47</td><td>7 – Cross-User</td><td class="method POST">POST</td><td>/api/mappings/</td><td>400/404</td><td>400</td><td><span class="badge pass-b">PASS</span></td><td class="note">User B cannot assign doctor to User A's patient. Patient not in scope.</td></tr>
+    <tr><td>48</td><td>7 – Cross-User</td><td class="method GET">GET</td><td>/api/mappings/1/</td><td>404</td><td>404</td><td><span class="badge pass-b">PASS</span></td><td class="note">User B cannot retrieve User A's mapping.</td></tr>
+    <tr><td>49</td><td>7 – Cross-User</td><td class="method DELETE">DELETE</td><td>/api/mappings/1/</td><td>404</td><td>404</td><td><span class="badge pass-b">PASS</span></td><td class="note">User B cannot delete User A's mapping.</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h2>Phase 3E / 4E — Delete &amp; Verify Gone (Cleanup Phase)</h2>
+<div class="clean">
+  ✅ <strong>Mapping ID=1</strong> deleted → 204. Confirmed gone → 404.<br>
+  ✅ <strong>Patient ID=1</strong> deleted → 204. Confirmed gone → 404.<br>
+  ✅ <strong>Doctor ID=1</strong> deleted → 204. Confirmed gone → 404.<br>
+  ℹ️ Test user accounts (User A ID=2, User B ID=3) retained — no account-deletion endpoint exists in the API.
+</div>
+
+<h2>Bugs &amp; Observations</h2>
+<div class="bugs">
+  <strong>⚠️ No bugs found. One observation:</strong>
+  <ul>
+    <li><strong>[OBS-1]</strong> <code>GET /api/mappings/{id}/</code> uses a <em>patient ID</em> (not a mapping ID) and returns a list of doctors for that patient. The error message on a missing ID says "No Patient matches the given query" — this is correct behaviour but the endpoint naming could be confusing. Consider documenting this clearly.</li>
+    <li><strong>[OBS-2]</strong> No HTTP 500 responses were observed across all 49 test cases. The server handled all invalid inputs gracefully.</li>
+    <li><strong>[OBS-3]</strong> No password, password hash, Django secret, or JWT token was exposed in any response body.</li>
+    <li><strong>[OBS-4]</strong> Patient ownership is enforced at the queryset level (owner filter), not just at the object level — User B receives 404 rather than 403, which is the recommended approach to avoid leaking resource existence.</li>
+  </ul>
+</div>
+
+<h2>Tests Requiring Manual / Separate Verification</h2>
+<div class="bugs" style="background:#e8f4fd; border-color:#0d6efd;">
+  <ul>
+    <li>PostgreSQL schema integrity, foreign key constraints, and index correctness — require direct DB inspection.</li>
+    <li>Django migration state completeness — requires <code>manage.py showmigrations</code>.</li>
+    <li>Token expiry enforcement — access token expiry (30 min) and refresh token expiry (24 h) not waited out during this run.</li>
+    <li>Concurrent request race conditions — not testable via sequential API calls.</li>
+  </ul>
+</div>
+
+</body>
+</html>
